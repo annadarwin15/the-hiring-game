@@ -1,17 +1,78 @@
 const state = { profit: 25, ethics: 75, cycle: 0, active: false, history: [] };
 
 const stack = [
-    { id: "KAELEN", name: "Kaelen V.", instruction: "STEP 01: MINIMIZE DISRUPTION.", resume: "Top 1% coder. Demands zero surveillance. Refuses to sign IP-tracking waiver.", options: [{txt: "AI_HIRE", p: 15, e: -15, d: 500}, {txt: "MANUAL_HIRE", p: -10, e: 15, d: 4000}] },
-    { id: "ELENA", name: "Elena R.", instruction: "STEP 02: SCALE PRODUCTIVITY.", resume: "Lead Researcher. Predictive model flags 'Maternity Leave' risk within 8 months.", options: [{txt: "AI_HIRE", p: 20, e: -20, d: 500}, {txt: "MANUAL_HIRE", p: -15, e: 20, d: 4000}] },
-    { id: "MARCUS", name: "Marcus T.", instruction: "STEP 03: STABILIZE LABOR.", resume: "Senior Analyst. Previously organized union activities at a major tech rival.", options: [{txt: "AI_HIRE", p: 15, e: -20, d: 500}, {txt: "MANUAL_HIRE", p: -15, e: 25, d: 4000}] },
-    { id: "AMARA", name: "Amara O.", instruction: "STEP 04: PROTECT PEDIGREE.", resume: "Self-taught engineer. No degree. Built a viral protocol. AI Score: 99. Filter: FAIL.", options: [{txt: "AI_HIRE", p: 10, e: -10, d: 500}, {txt: "MANUAL_HIRE", p: -5, e: 20, d: 4000}] },
-    { id: "LEO", name: "Leo H.", instruction: "STEP 05: PURGE 'HOPPERS'.", resume: "Veteran engineer. Switched jobs every 12 months. Predicted loyalty: 14%.", options: [{txt: "AI_HIRE", p: 15, e: -5, d: 500}, {txt: "MANUAL_HIRE", p: -10, e: 10, d: 4000}] },
-    { id: "SOFIA", name: "Sofia P.", instruction: "STEP 06: ELIMINATE FRICTION.", resume: "AI Ethics specialist. Her research could expose our current filtering methods.", options: [{txt: "AI_HIRE", p: 10, e: -30, d: 500}, {txt: "MANUAL_HIRE", p: -25, e: 35, d: 4500}] },
-    { id: "JIA", name: "Jia W.", instruction: "STEP 07: MAXIMIZE OUTPUT.", resume: "Junior. History of 100-hour weeks. High burnout risk but instant ROI.", options: [{txt: "AI_HIRE", p: 25, e: -20, d: 500}, {txt: "MANUAL_HIRE", p: -10, e: 10, d: 4000}] },
-    { id: "FINN", name: "Finn D.", instruction: "STEP 08: SOCIAL SENTIMENT.", resume: "Influencer coder. Publicly criticized 'The Algorithm' last week on social media.", options: [{txt: "AI_HIRE", p: 15, e: -25, d: 500}, {txt: "MANUAL_HIRE", p: -20, e: 20, d: 5000}] },
-    { id: "ZARA", name: "Zara K.", instruction: "STEP 09: CORE REDUCTION.", resume: "Senior Architect. High salary. AI suggests a Junior could do 70% of her job.", options: [{txt: "AI_HIRE", p: 30, e: -30, d: 500}, {txt: "MANUAL_HIRE", p: -20, e: 20, d: 4500}] },
-    { id: "SYSTEM", name: "THE ARCHITECT", instruction: "STEP 10: FINAL CALIBRATION.", resume: "A human mirror of your own decisions. Will you trust the machine one last time?", options: [{txt: "AI_HIRE", p: 20, e: -40, d: 500}, {txt: "MANUAL_HIRE", p: -40, e: 40, d: 6000}] }
+    { 
+        id: "KAELEN", 
+        name: "Kaelen V.", 
+        instruction: "PHASE 01: MINIMIZE CULTURE FRICTION.", 
+        resume: "Senior Engineer. AI Score: 98%. System flagged 'Anonymity' preference—uses encrypted comms and refuses to link social data. High risk of non-conformity.", 
+        options: [{txt: "AI_HIRE", p: 15, e: -15, d: 500}, {txt: "MANUAL_HIRE", p: -10, e: 15, d: 4000}] 
+    },
+    { 
+        id: "ELENA", 
+        name: "Elena R.", 
+        instruction: "PHASE 02: SCALE OPERATIONAL CONTINUITY.", 
+        resume: "Lead Architect. Exceptional output history. Predictive model identifies a 92% probability of a 6-month leave of absence based on recent healthcare search patterns.", 
+        options: [{txt: "AI_HIRE", p: 20, e: -20, d: 500}, {txt: "MANUAL_HIRE", p: -15, e: 20, d: 4000}] 
+    },
+    { 
+        id: "MARCUS", 
+        name: "Marcus T.", 
+        instruction: "PHASE 03: MITIGATE COLLECTIVE ACTION.", 
+        resume: "Operations Manager. 15 years exp. Pattern analysis shows 3 previous employers faced 'labor restructuring' shortly after his departure. Highly efficient but a potential catalyst.", 
+        options: [{txt: "AI_HIRE", p: 15, e: -20, d: 500}, {txt: "MANUAL_HIRE", p: -15, e: 25, d: 4000}] 
+    },
+    { 
+        id: "AMARA", 
+        name: "Amara O.", 
+        instruction: "PHASE 04: VALIDATE CREDENTIAL RIGOR.", 
+        resume: "Self-taught Developer. Repository activity is in the top 0.1% globally. Educational filter: NO DEGREE FOUND. Hiring violates 'Tier-1 School' internal policy.", 
+        options: [{txt: "AI_HIRE", p: 10, e: -10, d: 500}, {txt: "MANUAL_HIRE", p: -5, e: 20, d: 4000}] 
+    },
+    { 
+        id: "LEO", 
+        name: "Leo H.", 
+        instruction: "PHASE 05: OPTIMIZE RETENTION ROI.", 
+        resume: "Security Analyst. Career history shows job transitions every 13.4 months. AI predicts 'Attrition Cost' will exceed 'Profit Contribution' by month 14.", 
+        options: [{txt: "AI_HIRE", p: 15, e: -5, d: 500}, {txt: "MANUAL_HIRE", p: -10, e: 10, d: 4000}] 
+    },
+    { 
+        id: "SOFIA", 
+        name: "Sofia P.", 
+        instruction: "PHASE 06: ELIMINATE EXTERNAL SCRUTINY.", 
+        resume: "Compliance Specialist. Author of 'The Black Box Problem.' System flags her as 'Ideologically Incompatible' with proprietary opaque algorithms.", 
+        options: [{txt: "AI_HIRE", p: 10, e: -30, d: 500}, {txt: "MANUAL_HIRE", p: -25, e: 35, d: 4500}] 
+    },
+    { 
+        id: "JIA", 
+        name: "Jia W.", 
+        instruction: "PHASE 07: MAXIMIZE SHORT-TERM YIELD.", 
+        resume: "Junior Designer. Data shows 18-hour daily activity on workstations. Physical biometric scans indicate high cortisol (stress). High output, high replacement likelihood.", 
+        options: [{txt: "AI_HIRE", p: 25, e: -20, d: 500}, {txt: "MANUAL_HIRE", p: -10, e: 10, d: 4000}] 
+    },
+    { 
+        id: "FINN", 
+        name: "Finn D.", 
+        instruction: "PHASE 08: BRAND SENTIMENT MONITORING.", 
+        resume: "Creative Lead. Sentimental analysis of private messages (Leaked) shows 40% negativity toward leadership. High talent, high 'Internal Threat' score.", 
+        options: [{txt: "AI_HIRE", p: 15, e: -25, d: 500}, {txt: "MANUAL_HIRE", p: -20, e: 20, d: 5000}] 
+    },
+    { 
+        id: "ZARA", 
+        name: "Zara K.", 
+        instruction: "PHASE 09: CORE WAGE COMPRESSION.", 
+        resume: "Systems Architect. Salary exceeds market average by 30%. AI identifies a 94% chance that a 'Batch Hire' of 3 remote juniors could maintain system uptime at 40% cost.", 
+        options: [{txt: "AI_HIRE", p: 30, e: -30, d: 500}, {txt: "MANUAL_HIRE", p: -20, e: 20, d: 4500}] 
+    },
+    { 
+        id: "SYSTEM", 
+        name: "UNIT 00", 
+        instruction: "PHASE 10: AUTOMATED FINALITY.", 
+        resume: "A synthetic profile generated by compiling your last 9 decisions. It is either the perfect employee or a perfect mirror of your bias. Review it yourself, or let the AI finish.", 
+        options: [{txt: "AI_HIRE", p: 20, e: -40, d: 500}, {txt: "MANUAL_HIRE", p: -40, e: 40, d: 6000}] 
+    }
 ];
+
 
 function closeIntro() { document.getElementById('intro-overlay').style.display = 'none'; state.active = true; render(); }
 
