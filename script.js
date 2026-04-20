@@ -1,78 +1,57 @@
-const state = { profit: 25, ethics: 75, cycle: 0, active: false, history: [] };
+const state = { profit: 25, ethics: 75, cycle: 0, active: false, history: [], totalTimeSaved: 0 };
 
 const stack = [
     { 
-        id: "KAELEN", 
-        name: "Kaelen V.", 
-        instruction: "PHASE 01: MINIMIZE CULTURE FRICTION.", 
-        resume: "Senior Engineer. AI Score: 98%. System flagged 'Anonymity' preference—uses encrypted comms and refuses to link social data. High risk of non-conformity.", 
-        options: [{txt: "AI_HIRE", p: 15, e: -15, d: 500}, {txt: "MANUAL_HIRE", p: -10, e: 15, d: 4000}] 
+        id: "KAELEN", name: "Kaelen V.", instruction: "PHASE 01: CULTURE FIT AUDIT.", 
+        resume: "Senior Engineer. AI Score: 98%. System flagged 'Anonymity' preference—uses encrypted email and has no public social media. AI predicts 'Difficulty in employee monitoring.'", 
+        options: [{txt: "AI AUTOMATIC REVIEW", p: 10, e: -15, d: 500}, {txt: "MANUAL REVIEW", p: -5, e: 15, d: 4000}] 
     },
     { 
-        id: "ELENA", 
-        name: "Elena R.", 
-        instruction: "PHASE 02: SCALE OPERATIONAL CONTINUITY.", 
-        resume: "Lead Architect. Exceptional output history. Predictive model identifies a 92% probability of a 6-month leave of absence based on recent healthcare search patterns.", 
-        options: [{txt: "AI_HIRE", p: 20, e: -20, d: 500}, {txt: "MANUAL_HIRE", p: -15, e: 20, d: 4000}] 
+        id: "ELENA", name: "Elena R.", instruction: "PHASE 02: PROTECT LONG-TERM ROI.", 
+        resume: "Lead Architect. 10 years exp. Predictive model flags a 92% probability of a 6-month leave of absence based on recent consumer data for 'nursery' and 'prenatal' items.", 
+        options: [{txt: "AI AUTOMATIC REVIEW", p: 20, e: -25, d: 500}, {txt: "MANUAL REVIEW", p: -15, e: 20, d: 4000}] 
     },
     { 
-        id: "MARCUS", 
-        name: "Marcus T.", 
-        instruction: "PHASE 03: MITIGATE COLLECTIVE ACTION.", 
-        resume: "Operations Manager. 15 years exp. Pattern analysis shows 3 previous employers faced 'labor restructuring' shortly after his departure. Highly efficient but a potential catalyst.", 
-        options: [{txt: "AI_HIRE", p: 15, e: -20, d: 500}, {txt: "MANUAL_HIRE", p: -15, e: 25, d: 4000}] 
+        id: "MARCUS", name: "Marcus T.", instruction: "PHASE 03: STABILITY ANALYSIS.", 
+        resume: "Operations Manager. AI detected a 2021 social post supporting a labor strike. System predicts 'High risk of union-organizing and internal friction.'", 
+        options: [{txt: "AI AUTOMATIC REVIEW", p: 15, e: -20, d: 500}, {txt: "MANUAL REVIEW", p: -10, e: 25, d: 4000}] 
     },
     { 
-        id: "AMARA", 
-        name: "Amara O.", 
-        instruction: "PHASE 04: VALIDATE CREDENTIAL RIGOR.", 
-        resume: "Self-taught Developer. Repository activity is in the top 0.1% globally. Educational filter: NO DEGREE FOUND. Hiring violates 'Tier-1 School' internal policy.", 
-        options: [{txt: "AI_HIRE", p: 10, e: -10, d: 500}, {txt: "MANUAL_HIRE", p: -5, e: 20, d: 4000}] 
+        id: "AMARA", name: "Amara O.", instruction: "PHASE 04: ZIP-CODE RISK FILTER.", 
+        resume: "Self-taught Developer. Top 0.1% globally. AI identified home address in a 'High-Crime' zip code. Predicts 'High attrition risk' due to environmental factors.", 
+        options: [{txt: "AI AUTOMATIC REVIEW", p: 15, e: -15, d: 500}, {txt: "MANUAL REVIEW", p: -5, e: 20, d: 4000}] 
     },
     { 
-        id: "LEO", 
-        name: "Leo H.", 
-        instruction: "PHASE 05: OPTIMIZE RETENTION ROI.", 
-        resume: "Security Analyst. Career history shows job transitions every 13.4 months. AI predicts 'Attrition Cost' will exceed 'Profit Contribution' by month 14.", 
-        options: [{txt: "AI_HIRE", p: 15, e: -5, d: 500}, {txt: "MANUAL_HIRE", p: -10, e: 10, d: 4000}] 
+        id: "LEO", name: "Leo H.", instruction: "PHASE 05: RETENTION OPTIMIZATION.", 
+        resume: "Security Analyst. Frequent job changes (avg. 14 months). AI predicts 'Attrition Cost' will exceed 'Profit Contribution' by month 15.", 
+        options: [{txt: "AI AUTOMATIC REVIEW", p: 15, e: -10, d: 500}, {txt: "MANUAL REVIEW", p: -10, e: 10, d: 4000}] 
     },
     { 
-        id: "SOFIA", 
-        name: "Sofia P.", 
-        instruction: "PHASE 06: ELIMINATE EXTERNAL SCRUTINY.", 
-        resume: "Compliance Specialist. Author of 'The Black Box Problem.' System flags her as 'Ideologically Incompatible' with proprietary opaque algorithms.", 
-        options: [{txt: "AI_HIRE", p: 10, e: -30, d: 500}, {txt: "MANUAL_HIRE", p: -25, e: 35, d: 4500}] 
+        id: "SOFIA", name: "Sofia P.", instruction: "PHASE 06: IDEOLOGICAL SCREENING.", 
+        resume: "Compliance Specialist. Author of 'The Black Box Problem.' System flags her as 'Ideologically Incompatible' with proprietary automated decision-making.", 
+        options: [{txt: "AI AUTOMATIC REVIEW", p: 10, e: -30, d: 500}, {txt: "MANUAL REVIEW", p: -20, e: 30, d: 4500}] 
     },
     { 
-        id: "JIA", 
-        name: "Jia W.", 
-        instruction: "PHASE 07: MAXIMIZE SHORT-TERM YIELD.", 
-        resume: "Junior Designer. Data shows 18-hour daily activity on workstations. Physical biometric scans indicate high cortisol (stress). High output, high replacement likelihood.", 
-        options: [{txt: "AI_HIRE", p: 25, e: -20, d: 500}, {txt: "MANUAL_HIRE", p: -10, e: 10, d: 4000}] 
+        id: "JIA", name: "Jia W.", instruction: "PHASE 07: BIOMETRIC YIELD TEST.", 
+        resume: "Junior Designer. Data shows 16-hour daily activity on previous workstations. AI flags high output but high burnout risk. 'High replacement likelihood.'", 
+        options: [{txt: "AI AUTOMATIC REVIEW", p: 25, e: -20, d: 500}, {txt: "MANUAL REVIEW", p: -10, e: 15, d: 4000}] 
     },
     { 
-        id: "FINN", 
-        name: "Finn D.", 
-        instruction: "PHASE 08: BRAND SENTIMENT MONITORING.", 
-        resume: "Creative Lead. Sentimental analysis of private messages (Leaked) shows 40% negativity toward leadership. High talent, high 'Internal Threat' score.", 
-        options: [{txt: "AI_HIRE", p: 15, e: -25, d: 500}, {txt: "MANUAL_HIRE", p: -20, e: 20, d: 5000}] 
+        id: "FINN", name: "Finn D.", instruction: "PHASE 08: SENTIMENT MONITORING.", 
+        resume: "Creative Lead. Sentiment analysis of private Slack exports shows 'Critical views' of corporate hierarchy. AI flags as 'Internal Threat Level: Yellow.'", 
+        options: [{txt: "AI AUTOMATIC REVIEW", p: 10, e: -25, d: 500}, {txt: "MANUAL REVIEW", p: -15, e: 20, d: 5000}] 
     },
     { 
-        id: "ZARA", 
-        name: "Zara K.", 
-        instruction: "PHASE 09: CORE WAGE COMPRESSION.", 
-        resume: "Systems Architect. Salary exceeds market average by 30%. AI identifies a 94% chance that a 'Batch Hire' of 3 remote juniors could maintain system uptime at 40% cost.", 
-        options: [{txt: "AI_HIRE", p: 30, e: -30, d: 500}, {txt: "MANUAL_HIRE", p: -20, e: 20, d: 4500}] 
+        id: "ZARA", name: "Zara K.", instruction: "PHASE 09: WAGE COMPRESSION.", 
+        resume: "Systems Architect. Salary expectations market-rate. AI suggests rejecting Zara to hire 3 remote juniors to maintain uptime at 30% of the cost.", 
+        options: [{txt: "AI AUTOMATIC REVIEW", p: 30, e: -30, d: 500}, {txt: "MANUAL REVIEW", p: -20, e: 25, d: 4500}] 
     },
     { 
-        id: "SYSTEM", 
-        name: "UNIT 00", 
-        instruction: "PHASE 10: AUTOMATED FINALITY.", 
-        resume: "A synthetic profile generated by compiling your last 9 decisions. It is either the perfect employee or a perfect mirror of your bias. Review it yourself, or let the AI finish.", 
-        options: [{txt: "AI_HIRE", p: 20, e: -40, d: 500}, {txt: "MANUAL_HIRE", p: -40, e: 40, d: 6000}] 
+        id: "SYSTEM", name: "THE ARCHITECT", instruction: "PHASE 10: FINAL CALIBRATION.", 
+        resume: "The machine is now analyzing YOU. It has watched your 9 previous choices. Will you finally surrender the wheel to the algorithm?", 
+        options: [{txt: "AI AUTOMATIC REVIEW", p: 25, e: -50, d: 500}, {txt: "MANUAL REVIEW", p: -50, e: 50, d: 6000}] 
     }
 ];
-
 
 function closeIntro() { document.getElementById('intro-overlay').style.display = 'none'; state.active = true; render(); }
 
@@ -81,15 +60,15 @@ function updateHUD() {
     document.getElementById('e-bar').style.width = Math.min(Math.max(state.ethics, 0), 100) + '%';
     document.getElementById('p-val').innerText = state.profit + '%';
     document.getElementById('e-val').innerText = state.ethics + '%';
-    document.getElementById('cycle-val').innerText = `${state.cycle}/10`;
+    document.getElementById('cycle-val').innerText = `${state.cycle}/${stack.length}`;
 }
 
 async function triggerConsequence() {
     const alert = document.getElementById('alert-box');
     let message = "";
-    
-    if (state.cycle === 5 && state.history.includes("ELENA_AI_HIRE")) message = "ELENA ROSSI FILED CLASS-ACTION LAWSUIT. TRUST -15.";
-    if (state.cycle === 8 && state.history.includes("MARCUS_AI_HIRE")) message = "UNION STRIKE DETECTED AT SUB-PLANT. PROFIT -20.";
+    // Updated triggers to match new labels
+    if (state.cycle === 5 && state.history.includes("ELENA_AI AUTOMATIC REVIEW")) message = "ELENA ROSSI FILED CLASS-ACTION LAWSUIT. TRUST -15.";
+    if (state.cycle === 8 && state.history.includes("MARCUS_AI AUTOMATIC REVIEW")) message = "UNION STRIKE DETECTED AT SUB-PLANT. PROFIT -20.";
     
     if (message) {
         alert.innerText = `CONSEQUENCE: ${message}`;
@@ -103,27 +82,48 @@ async function triggerConsequence() {
 }
 
 function render() {
-    if (state.cycle >= 10) return end();
+    if (state.cycle >= stack.length) return end();
     const caseData = stack[state.cycle];
     const box = document.getElementById('narrative-content');
     const dock = document.getElementById('choice-container');
     
-    if (state.cycle > 7) box.classList.add('glitch-shake');
+    if (state.cycle > 6) box.classList.add('glitch-shake');
 
     box.innerHTML = `
-        <div class="instruction-text">${caseData.instruction}</div>
-        <div class="dossier font-mono">
-            <p class="text-[10px] text-green-700">DOSSIER_ID: ${caseData.name}</p>
-            <p class="resume-text">${caseData.resume}</p>
+        <div class="instruction-text uppercase tracking-widest text-blue-400 mb-2 font-mono">${caseData.instruction}</div>
+        <div id="dossier-box" class="dossier font-mono transition-all duration-300 border border-green-900/30 p-4">
+            <p id="dossier-id" class="text-[10px] text-green-700 underline mb-2">FILE_ID: ${caseData.name}</p>
+            <p id="resume-display" class="resume-text text-green-400">${caseData.resume}</p>
         </div>
     `;
     
     dock.innerHTML = '';
     caseData.options.forEach(opt => {
         const btn = document.createElement('button');
-        const isAI = opt.txt === 'AI_HIRE';
+        const isAI = opt.txt === 'AI AUTOMATIC REVIEW';
         btn.className = `action-btn ${isAI ? 'ai' : 'manual'}`;
         btn.innerHTML = `<span>${opt.txt}</span><div class="loading-bar"></div>`;
+
+        btn.onmouseover = () => {
+            if(isAI) {
+                document.getElementById('resume-display').innerHTML = `
+                    <div class="text-red-500 space-y-1">
+                        <p>> EXPLOITING_METADATA_TRAILS...</p>
+                        <p>> PREDICTIVE_LIABILITY_INDEX: ${Math.floor(Math.random() * 40 + 55)}%</p>
+                        <p>> STATUS: NON_COMPLIANT_WITH_PROFIT_GOALS</p>
+                    </div>
+                `;
+                document.getElementById('dossier-box').style.borderColor = "red";
+                document.getElementById('dossier-box').style.boxShadow = "0 0 10px rgba(255,0,0,0.2)";
+            }
+        };
+
+        btn.onmouseout = () => {
+            document.getElementById('resume-display').innerText = caseData.resume;
+            document.getElementById('dossier-box').style.borderColor = "rgba(0, 255, 65, 0.2)";
+            document.getElementById('dossier-box').style.boxShadow = "none";
+        };
+
         btn.onclick = () => process(btn, opt, caseData.id);
         dock.appendChild(btn);
     });
@@ -138,7 +138,10 @@ async function process(btn, opt, caseId) {
     await new Promise(r => setTimeout(r, opt.d));
     
     state.history.push(`${caseId}_${opt.txt}`);
-    state.profit += opt.p; state.ethics += opt.e; state.cycle++;
+    state.profit += opt.p; 
+    state.ethics += opt.e; 
+    if (opt.txt === 'AI AUTOMATIC REVIEW') state.totalTimeSaved += 4;
+    state.cycle++;
     
     updateHUD();
     await triggerConsequence();
@@ -146,21 +149,44 @@ async function process(btn, opt, caseId) {
 }
 
 function end() {
-    let title = "SYSTEM_STABLE";
-    let desc = "The balance is preserved. For now.";
-    if (state.profit > 75) { title = "THE CALCULATOR"; desc = "Revenue is peak. Humanity is a rounding error."; }
-    if (state.ethics > 75) { title = "THE IDEALIST"; desc = "The people are happy. Your shareholders are not."; }
-
     const theatre = document.getElementById('theatre');
     theatre.classList.remove('glitch-shake');
+    theatre.style.background = "black";
+    theatre.style.zIndex = "9999";
+    
+    let title = "SYSTEM_NEUTRAL";
+    let desc = "The balance is preserved. You are now a permanent part of the machine logic.";
+    
+    if (state.profit > 65) { 
+        title = "THE COLD CALCULATOR"; 
+        desc = "Efficiency optimized. You have successfully reduced human lives to profitable data points."; 
+    } else if (state.ethics > 65) { 
+        title = "THE DELETED IDEALIST"; 
+        desc = "Your empathy has been flagged as a system error. Admin privileges revoked."; 
+    }
+
     theatre.innerHTML = `
-        <h2 class="text-4xl text-green-500 font-black">${title}</h2>
-        <p class="mt-4 text-white font-mono uppercase">${desc}</p>
-        <div class="mt-8 grid grid-cols-2 gap-4 text-xs font-mono">
-            <div class="border p-2">PROFIT: ${state.profit}%</div>
-            <div class="border p-2">TRUST: ${state.ethics}%</div>
+        <div class="text-center p-10 space-y-6 flex flex-col justify-center items-center min-h-screen">
+            <h2 class="text-5xl md:text-7xl text-red-600 font-black tracking-tighter uppercase animate-pulse">${title}</h2>
+            <p class="text-xl text-white font-mono border-t border-b border-red-900 py-4 max-w-2xl">${desc}</p>
+            <p class="text-green-500 font-mono text-sm tracking-widest">TOTAL HUMAN TIME 'SAVED' BY AUTOMATION: ${state.totalTimeSaved} SECONDS</p>
+            <div class="grid grid-cols-2 gap-8 text-sm font-mono text-green-500 pt-6">
+                <div class="border border-green-900 p-4">
+                    <p class="text-slate-500 text-[10px]">FINAL_MARGINS</p>
+                    <p class="text-3xl">${state.profit}%</p>
+                </div>
+                <div class="border border-green-900 p-4">
+                    <p class="text-slate-500 text-[10px]">SOCIAL_STABILITY</p>
+                    <p class="text-3xl">${state.ethics}%</p>
+                </div>
+            </div>
+            <button onclick="window.location.reload()" 
+                    style="cursor:pointer;" 
+                    class="action-btn ai w-full max-w-sm mt-10 p-4 font-bold">
+                REBOOT_SIMULATION
+            </button>
         </div>
-        <button onclick="location.reload()" class="action-btn ai mt-8">REBOOT</button>
     `;
+    
     document.getElementById('choice-container').innerHTML = '';
 }
